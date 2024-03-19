@@ -59,16 +59,17 @@ func handleUpload(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 	buf := bytes.NewBuffer(nil)
-	_, copyErr := io.Copy(buf, file)
-	if copyErr != nil {
-		fmt.Println(copyErr)
+	_, err = io.Copy(buf, file)
+	if err != nil {
+		fmt.Println(err)
 		res.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(res, "Error Uploading File.")
 		return
 	}
-	errF := os.WriteFile("/go/media-server/ns_dump/"+folderType+"/"+fileName, buf.Bytes(), 0666)
-	if errF != nil {
-		fmt.Println(errF)
+	fmt.Println("Writing File: ", "/go/media-server/ns_dump/"+folderType+"/"+fileName)
+	err = os.WriteFile("/go/media-server/ns_dump/"+folderType+"/"+fileName, buf.Bytes(), 0666)
+	if err != nil {
+		fmt.Println(err)
 		res.WriteHeader(http.StatusInternalServerError)
 		fmt.Fprint(res, "Error Uploading File.")
 		return

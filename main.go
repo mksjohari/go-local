@@ -22,7 +22,7 @@ func handleDownload(res http.ResponseWriter, req *http.Request) {
 }
 
 func ensureDir(dirName string) error {
-	fmt.Printf("Ensuring Directory: %s\n", dirName)
+	// fmt.Printf("Ensuring Directory: %s\n", dirName)
 	err := os.Mkdir(dirName, 0666)
 	if err != nil {
 		info, errStat := os.Stat(dirName)
@@ -66,7 +66,7 @@ func handleUpload(res http.ResponseWriter, req *http.Request) {
 		fmt.Fprint(res, "Error Uploading File.")
 		return
 	}
-	fmt.Println("Writing File: ", "/go/media-server/ns_dump/"+folderType+"/"+fileName)
+	// fmt.Println("Writing File: ", "/go/media-server/ns_dump/"+folderType+"/"+fileName)
 	err = os.WriteFile("/go/media-server/ns_dump/"+folderType+"/"+fileName, buf.Bytes(), 0666)
 	if err != nil {
 		fmt.Println(err)

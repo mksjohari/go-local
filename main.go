@@ -4,11 +4,10 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"github.com/gorilla/mux"
 	"io"
 	"net/http"
 	"os"
-
-	"github.com/gorilla/mux"
 )
 
 func handleDownload(res http.ResponseWriter, req *http.Request) {
